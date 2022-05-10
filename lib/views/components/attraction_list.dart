@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constant/constant.dart';
 import '../../data/models/attraction_model.dart';
 import '../../data/repositories/attraction_repo.dart';
-import 'attraction_card.dart';
+import 'components.dart';
 
 class AttractionList extends StatelessWidget {
   AttractionList({Key? key}) : super(key: key);

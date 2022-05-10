@@ -1,45 +1,58 @@
 import 'package:flutter/material.dart';
-import 'constant/constant.dart';
-import 'views/components/attraction_list.dart';
-import 'views/components/bottom_bar_widget.dart';
-import 'views/components/components.dart';
+import 'package:rjc_codelab_2/constant/app_colors.dart';
+
+import 'views/pages/landing_page.dart';
 
 void main() {
   runApp(
     const MaterialApp(
-      home: LandingPage(),
+      // home: LandingPage(),
+      home: SplashPage(),
     ),
   );
 }
 
-class LandingPage extends StatelessWidget {
-  const LandingPage({Key? key}) : super(key: key);
+class SplashPage extends StatelessWidget {
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appTravelBar(),
-      drawer: const AppTravelDrawer(),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColor.primaryGray,
-              AppColor.secondaryGray,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+    
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => const LandingPage(),
+        ),
+      );
+    });
+
+    return Stack(
+      children: [
+        Container(
+          color: AppColor.mainYellow,
+        ),
+        const Align(
+          alignment: Alignment.center,
+          child: Icon(
+            Icons.airplanemode_on_rounded,
+            color: Colors.black,
+            size: 80,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const HeaderWidget(),
-            AttractionList(),
-            const BottomBarWidget(),
-          ],
+        Align(
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: 160,
+            height: 160,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Colors.black.withOpacity(0.2),
+              ),
+              strokeWidth: 10,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
